@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actuators</title>
+</head>
+<body>
+<h1>Actuator Endpoints</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>URL</th>
+        <th>Media Types</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="endpoint : ${endpoints}">
+        <td th:text="${endpoint.id}">Endpoint ID</td>
+        <td th:text="${endpoint.url}">Endpoint URL</td>
+        <td th:text="${endpoint.mediaTypes}">Media Types</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Save Actuator Record</h2>
+<form method="post" th:action="@{/save-record}" th:object="${actuatorRecord}">
+    <input type="hidden" th:field="*{endpointId}" />
+    <input type="hidden" th:field="*{url}" />
+    <input type="hidden" th:field="*{mediaTypes}" />
+    <input type="text" th:field="*{buildNumber}" placeholder="Build Number" />
+    <input type="text" th:field="*{timestamp}" placeholder="Timestamp" />
+    <button type="submit">Save Record</button>
+</form>
+</body>
+</html>
